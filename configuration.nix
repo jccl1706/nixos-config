@@ -3,7 +3,7 @@
 {
   imports = [
       ./hardware-configuration.nix
-      ./gnome.nix
+      #./gnome.nix
     ];
 
   # Bootloader.
@@ -25,12 +25,15 @@
   # Networking
   networking.hostName = "framework";
   networking.networkmanager.enable = true;
-
+  
+  # X Server
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
+
+  # KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # ZSH Shell
   environment.shells = with pkgs; [ zsh ];
@@ -73,8 +76,4 @@
   # Power Profiles
   services.power-profiles-daemon.enable = lib.mkDefault true;
 
-  # Gnome
-
 }
-
-

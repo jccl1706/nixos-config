@@ -4,7 +4,8 @@
   imports = [
       ./hardware-configuration.nix
       ./zsh.nix
-      #./gnome.nix
+      ./niri.nix
+      ./gnome.nix
     ];
 
   # Bootloader
@@ -42,8 +43,8 @@
   };
 
   # KDE Plasma Desktop Environment
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.displayManager.sddm.enable = true;
+  #services.desktopManager.plasma6.enable = true;
 
   # Set your time zone
   time.timeZone = "America/New_York";

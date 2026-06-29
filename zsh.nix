@@ -8,6 +8,11 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
     
+    # Correct System-Level NixOS History Rules
+    histSize = 10000;
+    histFile = "$HOME/.zsh_history";
+    interactiveShellInit = "setopt share_history"; # Instantly share history across open terminal windows
+    
     shellAliases = {
       ll = "ls -l";
       la = "ls -la";
@@ -24,6 +29,7 @@
     fuzzyCompletion = true;
     keybindings = true;
   };
+
   # Enable the lightning-fast Starship prompt engine
   programs.starship.enable = true;
 }

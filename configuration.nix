@@ -40,6 +40,9 @@
     enable32Bit = true;                     # Vital if you intend to run Steam/Wine gaming layers
   };
 
+  # Power Management 
+  powerManagement.powertop.enable = true;   # Enables automatic powertop tuning on boot
+
   # KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;

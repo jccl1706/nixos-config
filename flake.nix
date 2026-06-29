@@ -1,17 +1,24 @@
 {
-  description = "My NixOS Config";
+  description = "Julio's Clean NixOS Config";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
   };
-  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
-    nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      system = "x86_64-linux";
-      modules = [ 
-        ./configuration.nix 
-        nixos-hardware.nixosModules.framework-13-7040-amd
-      ];
+
+  outputs = inputs: inputs.flake-parts.lib.mkFlake
+    { inherit inputs; }
+    {
+      systems = [ "x86_64-linux" ];
+
+      flake = {
+        nixosConfigurations.framework = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./modules/configuration.nix
+          ];
+        };
+      };
     };
-  };
 }

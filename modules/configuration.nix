@@ -2,10 +2,10 @@
 
 {
   imports = [
-      ./hardware-configuration.nix
-      ./zsh.nix
+      ../hardware-configuration.nix
+      ../zsh.nix
+      ../gnome.nix
       ./niri.nix
-      ./gnome.nix
     ];
 
   # Bootloader

@@ -20,16 +20,25 @@
     "rd.udev.log_level=3"
     "udev.log_priority=3"
     "resume=/dev/disk/by-uuid/6c52488b-173c-4ea4-9d01-39314533612d"
+    
+    # AMD/Framework Power Savings & Performance Tweaks
+    "amdgpu.dcdebugmask=0x10"               # Helps idle components hit C10 low-power states
+    "amd_pstate=active"                     # Ensures the modern active AMD P-state driver rules performance
   ];
 
   # Networking
   networking.hostName = "framework";
   networking.networkmanager.enable = true;
   
-  # X Server
+  # X Server & Hardware Graphics Acceleration
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.excludePackages = [ pkgs.xterm ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;                     # Vital if you intend to run Steam/Wine gaming layers
+  };
 
   # KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -60,6 +69,8 @@
     neovim
     firefox
     fzf
+    btop                                    # Great for monitoring AMD core clocks and thermals live
+    powertop                                # Useful for checking real-time battery discharge rates
   ];
 
   # SSH Services
@@ -75,5 +86,8 @@
 
   # Power Profiles
   services.power-profiles-daemon.enable = lib.mkDefault true;
+
+  # Thermal Management for Framework Laptop
+  services.thermald.enable = true;          # Prevents severe thermal throttling under heavy compiling or gaming
 
 }

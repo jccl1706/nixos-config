@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -6,6 +6,7 @@
       ../zsh.nix
       ../gnome.nix
       ./niri.nix
+      inputs.self.nixosModules.niri
     ];
 
   # Bootloader
